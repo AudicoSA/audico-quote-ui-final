@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const MODES = ["Residential","Commercial","Tender","Insurance"];
+const MODES = ["Residential", "Commercial", "Tender", "Insurance"];
 const questions = [
   "How many rooms or zones do you need coverage for?",
   "Do you prefer ceiling or wall‑mounted speakers?",
@@ -12,7 +11,9 @@ const questions = [
 
 export default function AudicoQuoteWidget() {
   const [mode, setMode] = useState("Residential");
-  const [messages, setMessages] = useState([{ sender:"ai", text:"Hi! Let's start building your quote. What would you like help with today?" }]);
+  const [messages, setMessages] = useState([
+    { sender: "ai", text: "Hi! Let's start building your quote. What would you like help with today?" }
+  ]);
   const [input, setInput] = useState("");
   const [step, setStep] = useState(0);
   const [quoteItems, setQuoteItems] = useState([]);
@@ -55,19 +56,26 @@ export default function AudicoQuoteWidget() {
 
   return (
     <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
+      {/* Chat Area */}
       <div className="md:col-span-2 bg-white rounded-2xl shadow-lg flex flex-col h-[600px]">
-        <div class="flex gap-3 p-4 border-b">
+        {/* Mode Tabs */}
+        <div className="flex gap-3 p-4 border-b">
           {MODES.map(m => (
             <button
               key={m}
               onClick={() => setMode(m)}
-              className={\`px-4 py-2 rounded-full transition \${m === mode ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}\`}
+              className={`px-4 py-2 rounded-full transition ${
+                m === mode
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              }`}
             >
               {m}
             </button>
           ))}
         </div>
 
+        {/* Messages */}
         <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-gray-50">
           {messages.map((msg, i) => (
             <motion.div
@@ -75,13 +83,18 @@ export default function AudicoQuoteWidget() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className={\`max-w-[75%] p-4 rounded-xl shadow-md \${msg.sender === "ai" ? "bg-blue-50 text-gray-900 rounded-bl-none" : "bg-green-50 text-gray-900 self-end rounded-br-none"}\`}
+              className={`max-w-[75%] p-4 rounded-xl shadow-md ${
+                msg.sender === "ai"
+                  ? "bg-blue-50 text-gray-900 rounded-bl-none"
+                  : "bg-green-50 text-gray-900 self-end rounded-br-none"
+              }`}
             >
               {msg.text}
             </motion.div>
           ))}
         </div>
 
+        {/* Input */}
         <div className="border-t p-4 flex items-center">
           <input
             className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -99,6 +112,7 @@ export default function AudicoQuoteWidget() {
         </div>
       </div>
 
+      {/* Quote Panel */}
       <div className="bg-white rounded-2xl shadow-lg p-6 h-[600px] overflow-y-auto">
         <h3 className="text-2xl font-bold mb-4">Your Quote</h3>
         <ul className="space-y-3">
@@ -122,3 +136,4 @@ export default function AudicoQuoteWidget() {
     </div>
   );
 }
+
