@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AudicoQuoteWidget from './widget.jsx';
@@ -7,4 +8,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AudicoQuoteWidget />
   </React.StrictMode>
+);
+
 );
